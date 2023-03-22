@@ -48,6 +48,7 @@ function generateBombs(numbombs, max) {
     return bombs;
 }
 
+//
 function setMessage(message){
     const score = document.getElementById('score');
     score.innerHTML = message;
@@ -85,12 +86,13 @@ function play(e) {
     //console.log(bombs);
 
     //per il numero di celle genero la cella
+    let score = 0;
     for (let i = 1; i <= squareNumbers; i++) {
         const square = drawSquare(i, squareForRow);
         square.addEventListener('click', function () {
             if(bombs.includes(parseInt(this.innerHTML))){
                 this.classList.add('unsafe');
-                message = `HAI PERSO! Il tuo punteggio è: ${score}`;;        
+                message = `HAI PERSO! Il tuo punteggio è: ${score}`;        
             } else {
                 this.classList.add('safe');
                 score++;
