@@ -39,7 +39,7 @@ function getRndNumber(min, max) {
 //genera array delle bombe
 function generateBombs(numbombs, max) {
     const bombs = [];
-    while (bombs.leght < numbombs){
+    while (bombs.length < numbombs){
         const bomb = getRndNumber(1, max);
         if (!bombs.includes(bomb)){
             bombs.push(bomb);
@@ -90,7 +90,7 @@ function play(e) {
         square.addEventListener('click', function () {
             if(bombs.includes(parseInt(this.innerHTML))){
                 this.classList.add('unsafe');
-                message = `HAI PERSO!`;        
+                message = `HAI PERSO! Il tuo punteggio è: ${score}`;;        
             } else {
                 this.classList.add('safe');
                 score++;
