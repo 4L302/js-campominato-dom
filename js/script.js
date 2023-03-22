@@ -37,7 +37,7 @@ function getRndNumber(min, max) {
 }
 
 //genera array delle bombe
-function generateBombs(bombsnum, numsquares) {
+function generateBombs(numbombs, max) {
     const bombs = [];
     while (bombs.leght < numbombs){
         const bomb = getRndNumber(1, max);
@@ -45,13 +45,19 @@ function generateBombs(bombsnum, numsquares) {
             bombs.push(bomb);
         }
     }
+    return bombs;
+}
 
+function setMessage(message){
+    const score = document.getElementById('score');
+    score.innerHTML = message;
 }
 
 function play(e) {
     e.preventDefault();
     const playground = document.getElementById('playground');
     playground.innerHTML = '';
+    let message = 'Seleziona la difficoltà e premi play';
     const NUM_BOMBS = 16;
     //prendo il livello
     const level = document.getElementById('level').value;
@@ -74,7 +80,7 @@ function play(e) {
     //determino il n di celle per lato
     let squareForRow = Math.sqrt(squareNumbers);
     //console.log(squareForRow);
-
+    //genera bombe
     const bombs = generateBombs(NUM_BOMBS, squareNumbers);
     //console.log(bombs);
 
@@ -83,10 +89,14 @@ function play(e) {
         const square = drawSquare(i, squareForRow);
         square.addEventListener('click', function () {
             if(bombs.includes(parseInt(this.innerHTML))){
-                this.classList.add('unsafe');        
+                this.classList.add('unsafe');
+                message = `HAI PERSO!`;        
             } else {
                 this.classList.add('safe');
+                score++;
+                message = `Il tuo punteggio è: ${score}`;
             }
+            setMessage(message);
         });
         playground.appendChild(square);
     }
